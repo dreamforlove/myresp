@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.engineer.user.mapper.OrganizationMapper">
+  <resultMap id="BaseResultMap" type="com.engineer.user.pojo.Organization">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <constructor>
+      <idArg column="orga_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="orga_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="address" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="loc_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="postal_code" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="phone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="orga_type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="orga_code" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="business_license" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="business_scope" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="leader" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="leader_phone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="legal_person" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="pid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="sequence" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="memo" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="verify" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="enabled" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="creater_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="productid" javaType="java.lang.Long" jdbcType="BIGINT" />
+    </constructor>
+  </resultMap>
+  <resultMap id="OrgaResultMap" type="com.engineer.user.pojo.Organization">
+    <id property="orgaId" column="orga_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+    <result property="orgaName" column="orga_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getOrgaListByKeywords" resultMap="OrgaResultMap">
+    select orga_id, orga_name from organization
+    <where>
+      <if test="keywords != null and keywords != ''">
+        orga_name like '%${keywords}%'
+      </if>
+      <if test="userId != null and userId != ''">
+        and `creater_id` = #{userId}
+      </if>
+    </where>
+  </select>
+  <select id="getOrgaManagementList" resultMap="BaseResultMap">
+    select * from organization
+    <where>
+      <if test="verify != null and verify != ''">
+        verify = #{verify}
+      </if>
+      <if test="userId != null and userId != ''">
+        and `creater_id` = #{userId}
+      </if>
+      <if test="keywordsType != null and keywordsType != '' and keywords != null and keywords != ''">
+        <if test="keywordsType == 'orgaId'">
+          and `orga_id` = #{keywords}
+        </if>
+        <if test="keywordsType == 'orgaName'">
+          and `orga_name` like '%${keywords}%'
+        </if>
+        <if test="keywordsType == 'address'">
+          and `address` like '%${keywords}%'
+        </if>
+        <if test="keywordsType == 'email'">
+          and `email` = #{keywords}
+        </if>
+        <if test="keywordsType == 'phone'">
+          and `phone` = #{keywords}
+        </if>
+        <if test="keywordsType == 'pid'">
+          and `pid` = #{keywords}
+        </if>
+      </if>
+    </where>
+    ORDER BY sequence DESC
+  </select>
+  <select id="getJoinedOrgaByUserId" resultMap="OrgaResultMap">
+    SELECT o.orga_id, o.orga_name FROM organization o
+    INNER JOIN user_orga uo ON o.orga_id = uo.orga_id
+    WHERE uo.user_id = #{userId} AND uo.status = 1
+  </select>
+  <select id="getInvitedListByUserId" resultType="com.engineer.user.vo.UserOrgaVo">
+    SELECT o.orga_id, o.orga_name, address, email, phone, pid, uo.create_time, uo.id, uo.`status`
+    FROM organization o
+    INNER JOIN user_orga uo ON o.orga_id = uo.orga_id
+    WHERE uo.user_id = #{userId}
+  </select>
+  <select id="getStaffList" resultType="com.engineer.user.vo.InvitedStaff">
+    SELECT u.user_id, u.user_account, u.user_name, u.phone, u.email, uo.id, uo.`status`, uo.create_time
+    FROM user u
+    INNER JOIN user_orga uo ON u.user_id = uo.user_id
+    WHERE uo.orga_id = #{orgaId}
+    ORDER BY uo.create_time DESC
+  </select>
+</mapper>

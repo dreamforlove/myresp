@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.engineer.user.mapper.UserCertificateMapper">
+  <resultMap id="BaseResultMap" type="com.engineer.user.pojo.UserCertificate">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="user_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="cert_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="cert_type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="cert_code" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="cert_orga" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="verify" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="enabled" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="productid" javaType="java.lang.Long" jdbcType="BIGINT" />
+    </constructor>
+  </resultMap>
+</mapper>

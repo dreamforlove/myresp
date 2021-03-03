@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="engineer-common" />
+        <module name="engineer-user-interface" />
+        <module name="engineer-sms" />
+        <module name="engineer-user-service" />
+        <module name="engineer-registry" />
+        <module name="engineer-generator" />
+        <module name="engineer-auth-common" />
+        <module name="engineer-final-intface" />
+        <module name="engineer-gateway" />
+        <module name="engineer-auth-service" />
+        <module name="engineer-final-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="engineer-auth" target="1.8" />
+      <module name="engineer-auth-common" target="1.8" />
+      <module name="engineer-auth-service" target="1.8" />
+      <module name="engineer-common" target="1.8" />
+      <module name="engineer-cost" target="1.8" />
+      <module name="engineer-fianl" target="1.8" />
+      <module name="engineer-final-intface" target="1.8" />
+      <module name="engineer-final-service" target="1.8" />
+      <module name="engineer-gateway" target="1.8" />
+      <module name="engineer-generator" target="1.8" />
+      <module name="engineer-registry" target="1.8" />
+      <module name="engineer-sms" target="1.8" />
+      <module name="engineer-user" target="1.8" />
+      <module name="engineer-user-interface" target="1.8" />
+      <module name="engineer-user-service" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="engineer-auth-common" options="-parameters" />
+      <module name="engineer-auth-service" options="-parameters" />
+      <module name="engineer-common" options="-parameters" />
+      <module name="engineer-final-intface" options="-parameters" />
+      <module name="engineer-final-service" options="-parameters" />
+      <module name="engineer-gateway" options="-parameters" />
+      <module name="engineer-generator" options="-parameters" />
+      <module name="engineer-registry" options="-parameters" />
+      <module name="engineer-sms" options="-parameters" />
+      <module name="engineer-user-interface" options="-parameters" />
+      <module name="engineer-user-service" options="-parameters" />
+    </option>
+  </component>
+</project>

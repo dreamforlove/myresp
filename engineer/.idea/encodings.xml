@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/engineer-auth/engineer-auth-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/engineer-auth/engineer-auth-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/engineer-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/engineer-fianl/engineer-final-intface/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/engineer-fianl/engineer-final-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/engineer-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/engineer-generator/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/engineer-registry/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/engineer-sms/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/engineer-user/engineer-user-interface/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/engineer-user/engineer-user-service/src/main/java" charset="UTF-8" />
+  </component>
+</project>

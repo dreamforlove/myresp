@@ -1,0 +1,23 @@
+server:
+  port: 10000
+spring:
+  application:
+    name: engineer-registry
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10000/eureka
+    # 是否从Eureka-Server拉取服务实例注册信息
+    fetch-registry: false
+    # 是否向Eureka注册自身 （单节点部署时关闭）
+    register-with-eureka: false
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+  server:
+    # 是否开启自我保护(生产环境建议开启)
+    enable-self-preservation: false
+    # 开启自我保护模式比例，超过该比例后开启自我保护模式。
+    #renewal-percent-threshold: 0.85
+    # 自我保护模式比例更新定时任务执行频率。
+    #renewal-threshold-update-interval-ms: 1000

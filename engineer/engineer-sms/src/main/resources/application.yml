@@ -1,0 +1,34 @@
+server:
+  port: 8086
+spring:
+  application:
+    name: sms-service
+  rabbitmq:
+    host: 127.0.0.1
+    username: engineer
+    password: engineer
+    virtual-host: /engineer
+    port: 5672
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1 # 连接池最大等待时间 -1 没有限制:
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10000/eureka
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+engineer:
+  sms:
+    accessKeyId: LTAI7rXBGkHz8oJp
+    accessKeySecret: O3bN5oB3ElCseDmRdN0jGnPPb4biWY
+    signName: 乐优商城 # 签名名称
+    verifyCodeTemplate: SMS_169901373 # 模版名称

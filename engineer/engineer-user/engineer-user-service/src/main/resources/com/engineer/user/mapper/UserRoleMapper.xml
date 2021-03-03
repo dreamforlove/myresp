@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.engineer.user.mapper.UserRoleMapper">
+  <resultMap id="BaseResultMap" type="com.engineer.user.pojo.UserRole">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="user_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="role_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="creater_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="productid" javaType="java.lang.Long" jdbcType="BIGINT" />
+    </constructor>
+  </resultMap>
+    <delete id="deleteUserRole">
+      DELETE FROM user_role
+      WHERE user_id = #{userId}
+        AND productid = #{orgaId}
+        AND role_id in (
+        SELECT gr.role_id FROM usergrp_role gr
+        WHERE gr.usergrp_id = #{usergrpId}
+      )
+    </delete>
+</mapper>

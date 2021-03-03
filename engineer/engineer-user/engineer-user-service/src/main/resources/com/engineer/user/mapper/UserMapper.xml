@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.engineer.user.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.engineer.user.pojo.User">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <constructor>
+      <idArg column="user_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="user_account" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="name_spell" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="avatar_path" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="avatar_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="avatar_type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="phone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="phone_verified" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="email_verified" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="last_login_ip" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="last_login_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="enabled" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="productid" javaType="java.lang.Long" jdbcType="BIGINT" />
+    </constructor>
+  </resultMap>
+  <resultMap id="UserResultMap" type="com.engineer.user.pojo.User">
+    <id property="userId" column="user_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+    <result property="userAccount" column="user_account" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <result property="userName" column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <result property="nameSpell" column="name_spell" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <result property="avatarPath" column="avatar_path" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <result property="avatarName" column="avatar_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <result property="avatarType" column="avatar_type" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <result property="email" column="email" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <result property="phone" column="phone" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <result property="phoneVerified" column="phone_verified" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    <result property="emailVerified" column="email_verified" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    <result property="lastLoginIp" column="last_login_ip" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <result property="lastLoginTime" column="last_login_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    <result property="enabled" column="enabled" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    <result property="createTime" column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    <result property="productid" column="productid" javaType="java.lang.Long" jdbcType="BIGINT" />
+  </resultMap>
+  <select id="findUserByUserAccount" resultMap="BaseResultMap">
+    select * from user where user_account = #{userAccount}
+  </select>
+  <select id="selectUserList" resultMap="UserResultMap">
+    select user_id, user_account, user_name, name_spell, avatar_path, avatar_name, avatar_type, email,
+    phone, phone_verified, email_verified, last_login_ip, last_login_time, enabled, create_time, productid
+    from user
+    <where>
+      <if test="keywordsType != null and keywordsType != '' and keywords != null and keywords != ''">
+        <if test="keywordsType == 'userId'">
+          user_id = #{keywords}
+        </if>
+        <if test="keywordsType == 'userAccount'">
+          `user_account` = #{keywords}
+        </if>
+        <if test="keywordsType == 'userName'">
+          `user_name` = #{keywords}
+        </if>
+        <if test="keywordsType == 'phone'">
+          `phone` = #{keywords}
+        </if>
+      </if>
+    </where>
+  </select>
+</mapper>

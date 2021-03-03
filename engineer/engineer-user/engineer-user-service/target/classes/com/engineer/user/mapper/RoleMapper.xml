@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.engineer.user.mapper.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.engineer.user.pojo.Role">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <constructor>
+      <idArg column="role_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="role_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="role_desc" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="enabled" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="creater_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="sequence" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="productid" javaType="java.lang.Long" jdbcType="BIGINT" />
+    </constructor>
+  </resultMap>
+  <select id="selectRolesByUserId" resultMap="BaseResultMap">
+    SELECT r.role_id, role_name, role_desc, r.enabled, r.creater_id, r.create_time, r.sequence, r.productid
+    FROM role r
+    INNER JOIN user_role u ON u.role_id = r.role_id
+    WHERE u.user_id = #{userId} AND r.enabled = 1
+  </select>
+  <select id="getAuthorizedRoleListByUsergrpId" resultMap="BaseResultMap">
+    SELECT r.role_id, role_name, role_desc, ur.creater_id, ur.create_time, enabled, sequence, r.productid
+    FROM role r LEFT JOIN usergrp_role ur ON r.role_id = ur.role_id
+    WHERE ur.usergrp_id = #{usergrpId}
+  </select>
+  <select id="getUnauthorizedRoleListByUsergrpId" resultMap="BaseResultMap">
+    SELECT r.role_id, role_name, role_desc, r.enabled, r.creater_id, r.create_time, r.sequence, r.productid
+    FROM role r
+    WHERE NOT EXISTS (
+        SELECT 1 FROM usergrp_role ur
+        WHERE r.role_id = ur.role_id AND ur.usergrp_id = #{usergrpId}
+    )
+  </select>
+  <select id="selectRoleList" resultMap="BaseResultMap">
+    select role_id, role_name, role_desc, creater_id, create_time, enabled, sequence, productid
+    from role
+    <where>
+      <if test="keywordsType != null and keywordsType != '' and keywords != null and keywords != ''">
+        <if test="keywordsType == 'roleId'">
+          role_id = #{keywords}
+        </if>
+        <if test="keywordsType == 'roleName'">
+          `role_name` like '%${keywords}%'
+        </if>
+        <if test="keywordsType == 'createrId'">
+          `creater_id` = #{keywords}
+        </if>
+      </if>
+    </where>
+    order by sequence desc
+  </select>
+  <select id="getUserRoleListFromUsergrp" resultType="com.engineer.user.vo.UserRoleVo">
+    SELECT r.role_id, r.role_name, r.role_desc, r.enabled, r.sequence, tur.creater_id,
+           tur.create_time, IF(ISNULL(tur.creater_id), 0, 1) AS `status`
+    FROM role r
+    INNER JOIN usergrp_role gr ON r.role_id = gr.role_id
+    LEFT JOIN ${tmpUserRole} tur ON tur.role_id = r.role_id
+    WHERE gr.usergrp_id = #{usergrpId}
+    ORDER BY r.sequence DESC
+  </select>
+  <update id="createTmpUserRole">
+    CREATE TEMPORARY TABLE ${tmpUserRole} AS
+    SELECT id, user_id, role_id, creater_id, create_time
+    FROM user_role
+    WHERE user_id = #{userId}
+  </update>
+  <update id="dropTmpUserRole">
+    DROP TABLE IF EXISTS ${tmpUserRole}
+  </update>
+</mapper>

@@ -1,0 +1,39 @@
+{
+  "groups": [
+    {
+      "name": "engineer.auth",
+      "type": "com.engineer.auth.config.AuthProperties",
+      "sourceType": "com.engineer.auth.config.AuthProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "engineer.auth.client-id",
+      "type": "java.lang.String",
+      "sourceType": "com.engineer.auth.config.AuthProperties"
+    },
+    {
+      "name": "engineer.auth.client-secret",
+      "type": "java.lang.String",
+      "sourceType": "com.engineer.auth.config.AuthProperties"
+    },
+    {
+      "name": "engineer.auth.cookie-domain",
+      "type": "java.lang.String",
+      "sourceType": "com.engineer.auth.config.AuthProperties"
+    },
+    {
+      "name": "engineer.auth.cookie-max-age",
+      "type": "java.lang.Integer",
+      "sourceType": "com.engineer.auth.config.AuthProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "engineer.auth.token-validity-seconds",
+      "type": "java.lang.Long",
+      "sourceType": "com.engineer.auth.config.AuthProperties",
+      "defaultValue": 0
+    }
+  ],
+  "hints": []
+}

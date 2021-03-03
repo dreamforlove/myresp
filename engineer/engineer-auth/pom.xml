@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>engineer-cost</artifactId>
+        <groupId>com.engineering.parent</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../engineer-cost/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.engineering.common</groupId>
+    <artifactId>engineer-auth</artifactId>
+    <packaging>pom</packaging>
+
+    <name>engineer-auth</name>
+    <description>建设工程造价一体化云服务平台授权模块</description>
+    <modules>
+        <module>engineer-auth-common</module>
+        <module>engineer-auth-service</module>
+        <module>../engineer-user</module>
+    </modules>
+
+    <dependencies>
+    </dependencies>
+
+
+</project>

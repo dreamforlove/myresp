@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--导入数据库连接属性配置文件-->
+    <properties resource="generator.properties" />
+    <!--context 逆向工程的主要配置信息  id：工程名字 targetRuntime：设置生成的文件适用于哪个MyBatis版本-->
+    <!--defaultModelType: 设置生成的model类型-->
+    <context id="MySQL" targetRuntime="${generator.targetRuntime}" defaultModelType="flat">
+        <!--自动给关键字添加分隔符-->
+        <property name="autoDelimitKeywords" value="true"/>
+        <!--配置前置分隔符-->
+        <property name="beginningDelimiter" value="`"/>
+        <!--配置后置分隔符-->
+        <property name="endingDelimiter" value="`"/>
+        <!--生成文件编码-->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!--Cache插件-->
+        <!--<plugin type="org.mybatis.generator.plugins.CachePlugin">-->
+            <!--<property name="cache_eviction" value="LRU"/>-->
+            <!--<property name="cache_size" value="1024"/>-->
+        <!--</plugin>-->
+        <!--生成的mapper需要继承的统一接口-->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="com.engineer.common.mapper.BaseMapper"/>
+        </plugin>
+        <!-- 为模型生成序列化方法-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <!-- 为生成的Java模型创建一个toString方法 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <!--可以自定义生成model的代码注释-->
+        <commentGenerator type="com.engineer.CommentGenerator">
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+        <!--配置数据库连接-->
+        <jdbcConnection driverClass="${jdbc.driverClass}"
+                        connectionURL="${jdbc.connectionURL}"
+                        userId="${jdbc.userId}"
+                        password="${jdbc.password}">
+            <!--解决mysql驱动升级到8.0后不生成指定数据库代码的问题-->
+            <property name="nullCatalogMeansCurrent" value="true" />
+        </jdbcConnection>
+        <!--指定生成model的路径-->
+        <javaModelGenerator targetPackage="${package.model}"
+                            targetProject="E:/development/engineer/engineer-generator/src/main/java" >
+            <!-- 是否允许子包 -->
+            <property name="enableSubPackages" value="false" />
+            <!-- 是否对modal添加构造函数 -->
+            <property name="constructorBased" value="true" />
+            <!-- 是否清理从数据库中查询出的字符串左右两边的空白字符 -->
+            <property name="trimStrings" value="true" />
+            <!-- 建立modal对象是否不可改变 即生成的modal对象不会有setter方法，只有构造方法 -->
+            <property name="immutable" value="false" />
+        </javaModelGenerator>
+        <!--指定生成mapper.xml的路径-->
+        <sqlMapGenerator targetPackage="${package.xml}"
+                         targetProject="E:/development/engineer/engineer-generator/src/main/resources"/>
+        <!--指定生成mapper接口的的路径-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${package.mapper}"
+                             targetProject="E:/development/engineer/engineer-generator/src/main/java"/>
+        <!--生成全部表tableName设为%-->
+        <!--<table tableName="tb_user" domainObjectName="User">-->
+            <!--&lt;!&ndash; 设置自增ID的回显功能 &ndash;&gt;-->
+            <!--<generatedKey column="id" sqlStatement="Mysql"/>-->
+        <!--</table>-->
+        <!--地区表-->
+        <table tableName="location" />
+        <!--用户资料详情表-->
+        <table tableName="m_profile" />
+        <!--菜单权限表-->
+        <table tableName="menu">
+            <generatedKey column="menu_id" sqlStatement="Mysql"/>
+        </table>
+        <!--组织机构表-->
+        <table tableName="organization" />
+        <!--权限表-->
+        <table tableName="permission" />
+        <!--功能（资源）权限表-->
+        <table tableName="resource">
+            <generatedKey column="src_id" sqlStatement="Mysql"/>
+        </table>
+        <!--角色表-->
+        <table tableName="role" />
+        <!--角色_权限关联表-->
+        <table tableName="role_permission">
+            <generatedKey column="id" sqlStatement="Mysql"/>
+        </table>
+        <!--用户表-->
+        <table tableName="user" />
+        <!--用户组织机构关联表-->
+        <table tableName="user_orga">
+            <generatedKey column="id" sqlStatement="Mysql"/>
+        </table>
+        <!--用户_角色关联表-->
+        <table tableName="user_role">
+            <generatedKey column="id" sqlStatement="Mysql"/>
+        </table>
+        <!--用户_用户组关联表-->
+        <table tableName="user_usergrp">
+            <generatedKey column="id" sqlStatement="Mysql"/>
+        </table>
+        <!--用户组表-->
+        <table tableName="usergrp" />
+        <!--用户组_角色关联表-->
+        <table tableName="usergrp_role">
+            <generatedKey column="id" sqlStatement="Mysql"/>
+        </table>
+        <!--用户_证书关联表-->
+        <table tableName="user_certificate" />
+
+    </context>
+</generatorConfiguration>

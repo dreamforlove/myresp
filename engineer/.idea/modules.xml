@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/engineer.iml" filepath="$PROJECT_DIR$/.idea/engineer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/engineer-auth/engineer-auth.iml" filepath="$PROJECT_DIR$/engineer-auth/engineer-auth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/engineer-auth/engineer-auth-common/engineer-auth-common.iml" filepath="$PROJECT_DIR$/engineer-auth/engineer-auth-common/engineer-auth-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/engineer-auth/engineer-auth-service/engineer-auth-service.iml" filepath="$PROJECT_DIR$/engineer-auth/engineer-auth-service/engineer-auth-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/engineer-common/engineer-common.iml" filepath="$PROJECT_DIR$/engineer-common/engineer-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/engineer-cost/engineer-cost.iml" filepath="$PROJECT_DIR$/engineer-cost/engineer-cost.iml" />
+      <module fileurl="file://$PROJECT_DIR$/engineer-fianl/engineer-fianl.iml" filepath="$PROJECT_DIR$/engineer-fianl/engineer-fianl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/engineer-fianl/engineer-final-intface/engineer-final-intface.iml" filepath="$PROJECT_DIR$/engineer-fianl/engineer-final-intface/engineer-final-intface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/engineer-fianl/engineer-final-service/engineer-final-service.iml" filepath="$PROJECT_DIR$/engineer-fianl/engineer-final-service/engineer-final-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/engineer-gateway/engineer-gateway.iml" filepath="$PROJECT_DIR$/engineer-gateway/engineer-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/engineer-generator/engineer-generator.iml" filepath="$PROJECT_DIR$/engineer-generator/engineer-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/engineer-registry/engineer-registry.iml" filepath="$PROJECT_DIR$/engineer-registry/engineer-registry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/engineer-sms/engineer-sms.iml" filepath="$PROJECT_DIR$/engineer-sms/engineer-sms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/engineer-user/engineer-user.iml" filepath="$PROJECT_DIR$/engineer-user/engineer-user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/engineer-user/engineer-user-interface/engineer-user-interface.iml" filepath="$PROJECT_DIR$/engineer-user/engineer-user-interface/engineer-user-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/engineer-user/engineer-user-service/engineer-user-service.iml" filepath="$PROJECT_DIR$/engineer-user/engineer-user-service/engineer-user-service.iml" />
+    </modules>
+  </component>
+</project>

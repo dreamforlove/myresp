@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.engineer.user.mapper.LocationMapper">
+  <resultMap id="BaseResultMap" type="com.engineer.user.pojo.Location">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <constructor>
+      <idArg column="loc_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="loc_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="pid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="level" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="city_code" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="postal_code" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="mername" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="pinyin" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <select id="getHighLocation" resultType="com.engineer.user.vo.LocationTree">
+    select loc_id as value, loc_name as label from location where level = #{highLevel}
+  </select>
+  <select id="getHighLevelCount" resultType="int">
+    select `level` FROM location ORDER BY `level` ASC LIMIT 0,1
+  </select>
+  <select id="getLowLevelCount" resultType="int">
+    select `level` FROM location ORDER BY `level` DESC LIMIT 0,1
+  </select>
+  <select id="getLocationChildrenByPid" resultType="com.engineer.user.vo.LocationTree">
+    select loc_id as value, loc_name as label from location
+    where pid = #{pid}
+  </select>
+  <select id="getHighLocationDetail" resultType="com.engineer.user.vo.LocationVo">
+    select loc_id, loc_name, pid, level, city_code, postal_code, mername, pinyin
+    from location where level = #{highLevel}
+  </select>
+  <select id="getLocationChildrenListByPid" resultType="com.engineer.user.vo.LocationVo">
+    select loc_id, loc_name, pid, level, city_code, postal_code, mername, pinyin
+    from location where pid = #{pid}
+  </select>
+  <select id="getProvinceTotal" resultType="java.lang.Long">
+    select count(*) from location where level = '1'
+  </select>
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.engineer.user.mapper.MenuMapper">
+  <resultMap id="BaseResultMap" type="com.engineer.user.pojo.Menu">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <constructor>
+      <idArg column="menu_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="permission_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="menu_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="menu_url" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="menu_pid" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="productid" javaType="java.lang.Long" jdbcType="BIGINT" />
+    </constructor>
+  </resultMap>
+    <select id="selectMenusByRoleList" resultType="java.lang.String">
+        SELECT DISTINCT m.menu_url
+        FROM menu m
+        LEFT JOIN permission p ON m.permission_id = p.permission_id
+        LEFT JOIN role_permission rp ON rp.permission_id = p.permission_id
+        WHERE p.enabled = 1 AND rp.role_id IN
+        <foreach collection="roles" item="role" open="(" close=")" separator=",">
+          #{role.roleId}
+        </foreach>
+    </select>
+    <select id="getAuthorizedMenuListByRoleId" resultType="com.engineer.user.vo.MenuVo">
+        SELECT m.menu_id, m.permission_id, m.menu_name, m.menu_url, rp.creater_id, rp.create_time, p.enabled, m.menu_pid, m.productid
+        FROM menu m
+        LEFT JOIN permission p ON m.permission_id = p.permission_id
+        LEFT JOIN role_permission rp ON rp.permission_id = p.permission_id
+        WHERE rp.role_id = #{roleId}
+    </select>
+    <select id="getUnAuthorizedMenuListByRoleId" resultType="com.engineer.user.vo.MenuVo">
+        SELECT m.menu_id, m.permission_id, m.menu_name, m.menu_url, p.enabled
+        FROM menu m
+        LEFT JOIN permission p ON p.permission_id = m.permission_id
+        WHERE NOT EXISTS (
+            SELECT 1 FROM role_permission rp
+            WHERE rp.permission_id = p.permission_id AND rp.role_id = #{roleId}
+        )
+    </select>
+    <select id="getMenuList" resultType="com.engineer.user.vo.MenuVo">
+        SELECT m.menu_id, m.permission_id, m.menu_name, m.menu_url, m.menu_pid, p.creater_id, p.create_time, p.enabled, p.productid
+        FROM permission p
+        INNER JOIN menu m ON p.permission_id = m.permission_id
+    </select>
+</mapper>
